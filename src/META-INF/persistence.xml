@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="DAOCimaPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>entidades.AccesoDocumento</class>
+    <class>entidades.Accountinfo</class>
+    <class>entidades.AnalistaParametro</class>
+    <class>entidades.AspectoPregunta</class>
+    <class>entidades.Bios</class>
+    <class>entidades.Cantidad</class>
+    <class>entidades.Cargo</class>
+    <class>entidades.Cliente</class>
+    <class>entidades.ComentarioDocumento</class>
+    <class>entidades.Componente</class>
+    <class>entidades.ComponenteCargo</class>
+    <class>entidades.Condicional</class>
+    <class>entidades.Constante</class>
+    <class>entidades.Control</class>
+    <class>entidades.Cotizacion</class>
+    <class>entidades.DatoHidrobiologia</class>
+    <class>entidades.DecimalVarianal</class>
+    <class>entidades.Departamento</class>
+    <class>entidades.DetalleOrdenCompra</class>
+    <class>entidades.DetalleServicioInterno</class>
+    <class>entidades.DetalleSolicitudCompra</class>
+    <class>entidades.DispositivoOtros</class>
+    <class>entidades.DispositivoRed</class>
+    <class>entidades.Documento</class>
+    <class>entidades.DocumentoAplicativo</class>
+    <class>entidades.Empresa</class>
+    <class>entidades.EquipoNuevo</class>
+    <class>entidades.EvaluacionProveedor</class>
+    <class>entidades.FirmaUsuario</class>
+    <class>entidades.FormatoEvaluacion</class>
+    <class>entidades.Formula</class>
+    <class>entidades.FormulaVariableCalculo</class>
+    <class>entidades.FotoHidrobiologia</class>
+    <class>entidades.Hardware</class>
+    <class>entidades.Impresora</class>
+    <class>entidades.Inputs</class>
+    <class>entidades.InventarioPc</class>
+    <class>entidades.MatrizAnalisis</class>
+    <class>entidades.Monitor</class>
+    <class>entidades.Muestra</class>
+    <class>entidades.MuestraAnalisis</class>
+    <class>entidades.MuestraAnalisisAuditoria</class>
+    <class>entidades.MuestraAnalisisHistorico</class>
+    <class>entidades.MuestraAuditoria</class>
+    <class>entidades.MuestraHistorico</class>
+    <class>entidades.Muestreo</class>
+    <class>entidades.MuestreoAuditoria</class>
+    <class>entidades.MuestreoHistorico</class>
+    <class>entidades.OrdenCompra</class>
+    <class>entidades.Password</class>
+    <class>entidades.Pregunta</class>
+    <class>entidades.Printer</class>
+    <class>entidades.Proceso</class>
+    <class>entidades.Proveedor</class>
+    <class>entidades.ProveedorProdserv</class>
+    <class>entidades.ProveedorVariableAnalisis</class>
+    <class>entidades.Proyecto</class>
+    <class>entidades.Punto</class>
+    <class>entidades.Reporte</class>
+    <class>entidades.ReporteAuditoria</class>
+    <class>entidades.ReporteHistorico</class>
+    <class>entidades.RespEvalProv</class>
+    <class>entidades.RespSeleProv</class>
+    <class>entidades.ResponsableDocumento</class>
+    <class>entidades.Resultado</class>
+    <class>entidades.ResultadoCalidadMuestra</class>
+    <class>entidades.SUsuario</class>
+    <class>entidades.SeleProvSoliComp</class>
+    <class>entidades.ServicioInterno</class>
+    <class>entidades.Software</class>
+    <class>entidades.Solicitud</class>
+    <class>entidades.SolicitudCompra</class>
+    <class>entidades.SoporteProveedor</class>
+    <class>entidades.Storage</class>
+    <class>entidades.Suministro</class>
+    <class>entidades.Tecnico</class>
+    <class>entidades.TipoAnalisis</class>
+    <class>entidades.TipoDocumento</class>
+    <class>entidades.TipoFormatoEvaluacion</class>
+    <class>entidades.TipoMuestra</class>
+    <class>entidades.TipoMuestreo</class>
+    <class>entidades.TipoProductoServicio</class>
+    <class>entidades.TipoValor</class>
+    <class>entidades.UsuarioCargo</class>
+    <class>entidades.Validacion</class>
+    <class>entidades.Valor</class>
+    <class>entidades.ValorAuditoria</class>
+    <class>entidades.VariableAnalisis</class>
+    <class>entidades.VariableAnalisisControl</class>
+    <class>entidades.VariableCalculo</class>
+    <class>entidades.VariablesFormula</class>
+    <class>entidades.VarianalControlCantidad</class>
+    <class>entidades.VersionAplicacion</class>
+    <class>entidades.correo.CorreoEnviar</class>
+    <class>entidades.EquipamientoInterno</class>
+    <class>entidades.HojaVida</class>
+    <class>entidades.ResultadoTemporal</class>
+    <class>entidades.Departamento_1</class>
+    <class>entidades.VariableAnalisis_1</class>
+    <class>entidades.VariableAnalisisFormato</class>
+    <class>entidades.Cargo_1</class>
+    <properties>
+      <property name="eclipselink.cache.shared.default" value="false"/>
+      <property name="reportPrincipal" value="C:/SistemaCima/lib/ReporteAguas.jasper"/>
+      <property name="reportPrincipalAguaPotable" value="C:/SistemaCima/lib/ReporteAguaPotable.jasper"/>
+      <property name="reportPrincipalResiduoPeligroso" value="C:/SistemaCima/lib/ReporteResiduoPeligroso.jasper"/>
+      <property name="reportPrincipalHidrobiologia" value="C:/SistemaCima/lib/ReporteHidrobiologia.jasper"/>
+      <property name="informePrincipal" value="C:/SistemaCima/lib/informe.jasper"/>
+      <property name="reportCalidadAireSO2" value="C:/SistemaCima/lib/ReporteCalidadAireSo2.jasper"/>
+      <property name="reportCalidadAireFormaldheido" value="C:/SistemaCima/lib/ReporteCalidadAireFormaldheido.jasper"/>
+      <property name="reportCalidadAirePm10" value="C:/SistemaCima/lib/ReporteCalidadAirePM10.jasper"/>
+      <property name="reportCalidadAireTsp" value="C:/SistemaCima/lib/ReporteCalidadAireTSP.jasper"/>
+      <property name="anexoACalidadAire" value="C:/SistemaCima/lib/Anexo ACalidadAire.jasper"/>
+      <property name="anexoBCalidadAire" value="C:/SistemaCima/lib/Anexo B Calidad del aire.jasper"/>
+      <property name="reportCalidadAireFinal" value="C:/SistemaCima/lib/ReporteCalidadAireFirmas.jasper"/>
+      <property name="reportPrincipalDistinto" value="C:/SistemaCima/lib/ReporteAguaPotable.jasper"/>
+      <property name="anexoAReporteDistinto" value="C:/SistemaCima/lib/Anexo A AguaPotable.jasper"/>
+      <property name="anexoBReporteDistinto" value="C:/SistemaCima/lib/Anexo B AguaPotable.jasper"/>
+      <property name="reportCalidadAireSubcontratado" value="C:/SistemaCima/lib/ReporteCalidadAireSubcontratado.jasper"/>
+      <property name="reportCalidadAireBtex" value="C:/SistemaCima/lib/ReporteCalidadAireBtex.jasper"/>
+      <property name="reportCalidadAireCOV" value="C:/SistemaCima/lib/ReporteCalidadAireVOC&apos;s.jasper"/>
+      <property name="anexoA" value="C:/SistemaCima/lib/Anexo A.jasper"/>
+      <property name="anexoAAguaPotable" value="C:/SistemaCima/lib/Anexo A AguaPotable.jasper"/>
+      <property name="anexoAResiduoPeligroso" value="C:/SistemaCima/lib/Anexo A Residuo Peligroso.jasper"/>
+      <property name="anexoB" value="C:/SistemaCima/lib/Anexo B.jasper"/>
+      <property name="anexoBResiduoPeligroso" value="C:/SistemaCima/lib/Anexo B Residuo Peligroso.jasper"/>
+      <property name="anexoBAguaPotable" value="C:/SistemaCima/lib/Anexo B AguaPotable.jasper"/>
+      <property name="reportPrincipalExcel" value="C:/SistemaCima/lib/ReporteAguasExcel.jasper"/>
+      <property name="reportHidrobiologiaExcel" value="C:/SistemaCima/lib/ReporteHidrobiologiaExcel.jasper"/>
+      <property name="reportFirmasHidrobiologia" value="C:/SistemaCima/lib/ReporteHidrobiologiaFirmas.jasper"/>
+      <property name="anexoAExcel" value="C:/SistemaCima/lib/Anexo A Excel.jasper"/>
+      <property name="anexoBExcel" value="C:/SistemaCima/lib/Anexo B Excel.jasper"/>
+      <property name="formatoFL-079" value="C:/SistemaCima/lib/RecepcionMuestrasFL-079.jasper"/>
+      <property name="eclipselink.jpa.uppercase-column-names" value="true"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.100.3:3306/cima?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="Cim4mb13nt32013"/>
+    </properties>
+  </persistence-unit>
+</persistence>
