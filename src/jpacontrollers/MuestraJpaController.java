@@ -226,6 +226,16 @@ public class MuestraJpaController implements Serializable {
     
     
     public List encontrarMuestra(Muestra muestra, String fecha) {
+        System.out.println("numero de muestra reporte "+muestra.getReporte().getPiReporteId());
+         System.out.println("numero de muestra nombre "+muestra.getIdResponsable().getNombre());
+         System.out.println("numero de muestra muestreo "+muestra.getIdMuestreo().getIdMuestreo());
+         
+          System.out.println("numero de muestra tipo muestra "+muestra.getTipoMuestreo().getIdtpMuestra());
+          System.out.println("numero de muestra id matriz "+muestra.getIdMatriz());
+           System.out.println("numero de muestra id proyecto "+muestra.getProyecto().getIdProyecto());
+           
+           System.out.println("numero de muestra fecha "+fecha);
+          
         EntityManager em = getEntityManager();
         if(muestra.getFechaTomaMuestra()!=null){
             String consulta = "SELECT * FROM muestra where fs_muestra_reporte=? "
