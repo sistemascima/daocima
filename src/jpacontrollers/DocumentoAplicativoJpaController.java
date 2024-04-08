@@ -188,6 +188,9 @@ public class DocumentoAplicativoJpaController implements Serializable {
     }
     
     
+  
+    
+    
     public String encontrarPathDocumentoAguas(String consecutivo, String tipo) {
         System.out.println("consecutivo" + consecutivo);
         System.out.println("tipo" + tipo);
@@ -272,5 +275,340 @@ public class DocumentoAplicativoJpaController implements Serializable {
             em.close();
         }
     }
+
+      public String encontrarPathDocumentoSo2(String version, String tipo) {
+        System.out.println("version" + version);
+        System.out.println("tipo" + tipo);
+        EntityManager em = getEntityManager();
+        String consulta = " 	   select s_docu_aplic_archivo "
+                + "from documento_aplicativo "
+                + "where fs_docu_aplic_document_tipodocu='F' "
+                + "and fs_docu_aplic_document_letrproc='L' "
+                + "and fs_docu_aplic_document_consecutivo=028 "
+                + "and fs_docu_aplic_tipo_docu_tipo='SO2' "
+                + "and fs_docu_aplic_document_version=? "
+                + "and s_docu_aplic_extension=?";
+        try {
+            Query q = em.createNativeQuery(consulta);
+            q.setParameter(1, version);
+            q.setParameter(2, tipo);
+            return (String) q.getSingleResult();
+        } finally {
+            em.close();
+        }
+    }
+      
+       public String encontrarPathDocumentoFormaldheido(String consecutivo, String tipo) {
+        System.out.println("consecutivo" + consecutivo);
+        System.out.println("tipo" + tipo);
+        EntityManager em = getEntityManager();
+        String consulta = " 	   select s_docu_aplic_archivo "
+                + "from documento_aplicativo "
+                + "where fs_docu_aplic_document_tipodocu='F' "
+                + "and fs_docu_aplic_document_letrproc='L' "
+                + "and fs_docu_aplic_document_consecutivo=028 "
+                + "and fs_docu_aplic_tipo_docu_tipo='FORMALDHEIDO' "
+                + "and fs_docu_aplic_document_version=? "
+                + "and s_docu_aplic_extension=?";
+        try {
+            Query q = em.createNativeQuery(consulta);
+            q.setParameter(1, consecutivo);
+            q.setParameter(2, tipo);
+            return (String) q.getSingleResult();
+        } finally {
+            em.close();
+        }
+    }
+       
+        public String encontrarPathDocumentoPm10(String consecutivo, String tipo) {
+        System.out.println("consecutivo" + consecutivo);
+        System.out.println("tipo" + tipo);
+        EntityManager em = getEntityManager();
+        String consulta = " 	   select s_docu_aplic_archivo "
+                + "from documento_aplicativo "
+                + "where fs_docu_aplic_document_tipodocu='F' "
+                + "and fs_docu_aplic_document_letrproc='L' "
+                + "and fs_docu_aplic_document_consecutivo=028 "
+                + "and fs_docu_aplic_tipo_docu_tipo='PM10' "
+                + "and fs_docu_aplic_document_version=? "
+                + "and s_docu_aplic_extension=?";
+        try {
+            Query q = em.createNativeQuery(consulta);
+            q.setParameter(1, consecutivo);
+            q.setParameter(2, tipo);
+            return (String) q.getSingleResult();
+        } finally {
+            em.close();
+        }
+        
+        
+    }
+        
+          public String encontrarPathDocumentoTsp(String consecutivo, String tipo) {
+        System.out.println("consecutivo" + consecutivo);
+        System.out.println("tipo" + tipo);
+        EntityManager em = getEntityManager();
+        String consulta = " 	   select s_docu_aplic_archivo "
+                + "from documento_aplicativo "
+                + "where fs_docu_aplic_document_tipodocu='F' "
+                + "and fs_docu_aplic_document_letrproc='L' "
+                + "and fs_docu_aplic_document_consecutivo=028 "
+                + "and fs_docu_aplic_tipo_docu_tipo='TSP' "
+                + "and fs_docu_aplic_document_version=? "
+                + "and s_docu_aplic_extension=?";
+        try {
+            Query q = em.createNativeQuery(consulta);
+            q.setParameter(1, consecutivo);
+            q.setParameter(2, tipo);
+            return (String) q.getSingleResult();
+        } finally {
+            em.close();
+        }
+      }
+          
+           
+          public String encontrarPathDocumentoHidrocarburos(String consecutivo, String tipo) {
+        System.out.println("consecutivo" + consecutivo);
+        System.out.println("tipo" + tipo);
+        EntityManager em = getEntityManager();
+        String consulta = " 	   select s_docu_aplic_archivo "
+                + "from documento_aplicativo "
+                + "where fs_docu_aplic_document_tipodocu='F' "
+                + "and fs_docu_aplic_document_letrproc='L' "
+                + "and fs_docu_aplic_document_consecutivo=028 "
+                + "and fs_docu_aplic_tipo_docu_tipo='HIDROCARBUROS' "
+                + "and fs_docu_aplic_document_version=? "
+                + "and s_docu_aplic_extension=?";
+        try {
+            Query q = em.createNativeQuery(consulta);
+            q.setParameter(1, consecutivo);
+            q.setParameter(2, tipo);
+            return (String) q.getSingleResult();
+        } finally {
+            em.close();
+        }
+      }
+          
+            
+          public String encontrarPathDocumentoCovs(String consecutivo, String tipo) {
+        System.out.println("consecutivo" + consecutivo);
+        System.out.println("tipo" + tipo);
+        EntityManager em = getEntityManager();
+        String consulta = " 	   select s_docu_aplic_archivo "
+                + "from documento_aplicativo "
+                + "where fs_docu_aplic_document_tipodocu='F' "
+                + "and fs_docu_aplic_document_letrproc='L' "
+                + "and fs_docu_aplic_document_consecutivo=028 "
+                + "and fs_docu_aplic_tipo_docu_tipo='COVS' "
+                + "and fs_docu_aplic_document_version=? "
+                + "and s_docu_aplic_extension=?";
+        try {
+            Query q = em.createNativeQuery(consulta);
+            q.setParameter(1, consecutivo);
+            q.setParameter(2, tipo);
+            return (String) q.getSingleResult();
+        } finally {
+            em.close();
+        }
+      }
+          
+           public String encontrarPathDocumentoAmoniaco(String consecutivo, String tipo) {
+        System.out.println("consecutivo" + consecutivo);
+        System.out.println("tipo" + tipo);
+        EntityManager em = getEntityManager();
+        String consulta = " 	   select s_docu_aplic_archivo "
+                + "from documento_aplicativo "
+                + "where fs_docu_aplic_document_tipodocu='F' "
+                + "and fs_docu_aplic_document_letrproc='L' "
+                + "and fs_docu_aplic_document_consecutivo=028 "
+                + "and fs_docu_aplic_tipo_docu_tipo='AMONIACO' "
+                + "and fs_docu_aplic_document_version=? "
+                + "and s_docu_aplic_extension=?";
+        try {
+            Query q = em.createNativeQuery(consulta);
+            q.setParameter(1, consecutivo);
+            q.setParameter(2, tipo);
+            return (String) q.getSingleResult();
+        } finally {
+            em.close();
+        }
+      }
+           
+                public String encontrarPathDocumentoSubcontratado(String consecutivo, String tipo) {
+        System.out.println("consecutivo" + consecutivo);
+        System.out.println("tipo" + tipo);
+        EntityManager em = getEntityManager();
+        String consulta = " 	   select s_docu_aplic_archivo "
+                + "from documento_aplicativo "
+                + "where fs_docu_aplic_document_tipodocu='F' "
+                + "and fs_docu_aplic_document_letrproc='L' "
+                + "and fs_docu_aplic_document_consecutivo=028 "
+                + "and fs_docu_aplic_tipo_docu_tipo='SUBCONTRATADO' "
+                + "and fs_docu_aplic_document_version=? "
+                + "and s_docu_aplic_extension=?";
+        try {
+            Query q = em.createNativeQuery(consulta);
+            q.setParameter(1, consecutivo);
+            q.setParameter(2, tipo);
+            return (String) q.getSingleResult();
+        } finally {
+            em.close();
+        }
+      }
+                
+                  public String encontrarPathDocumentoAnexoA(String consecutivo, String tipo) {
+        System.out.println("consecutivo" + consecutivo);
+        System.out.println("tipo" + tipo);
+        EntityManager em = getEntityManager();
+        String consulta = " 	   select s_docu_aplic_archivo "
+                + "from documento_aplicativo "
+                + "where fs_docu_aplic_document_tipodocu='F' "
+                + "and fs_docu_aplic_document_letrproc='L' "
+                + "and fs_docu_aplic_document_consecutivo=028 "
+                + "and fs_docu_aplic_tipo_docu_tipo='ANEXOA' "
+                + "and fs_docu_aplic_document_version=? "
+                + "and s_docu_aplic_extension=?";
+        try {
+            Query q = em.createNativeQuery(consulta);
+            q.setParameter(1, consecutivo);
+            q.setParameter(2, tipo);
+            return (String) q.getSingleResult();
+        } finally {
+            em.close();
+        }
+      }
+                  
+              public String encontrarPathDocumentoAnexoB(String consecutivo, String tipo) {
+        System.out.println("consecutivo" + consecutivo);
+        System.out.println("tipo" + tipo);
+        EntityManager em = getEntityManager();
+        String consulta = " 	   select s_docu_aplic_archivo "
+                + "from documento_aplicativo "
+                + "where fs_docu_aplic_document_tipodocu='F' "
+                + "and fs_docu_aplic_document_letrproc='L' "
+                + "and fs_docu_aplic_document_consecutivo=028 "
+                + "and fs_docu_aplic_tipo_docu_tipo='ANEXOB' "
+                + "and fs_docu_aplic_document_version=? "
+                + "and s_docu_aplic_extension=?";
+        try {
+            Query q = em.createNativeQuery(consulta);
+            q.setParameter(1, consecutivo);
+            q.setParameter(2, tipo);
+            return (String) q.getSingleResult();
+        } finally {
+            em.close();
+        }
+      }
+              
+                      public String encontrarPathDocumentoMetodo(String consecutivo, String tipo) {
+        System.out.println("consecutivo" + consecutivo);
+        System.out.println("tipo" + tipo);
+        EntityManager em = getEntityManager();
+        String consulta = " 	   select s_docu_aplic_archivo "
+                + "from documento_aplicativo "
+                + "where fs_docu_aplic_document_tipodocu='F' "
+                + "and fs_docu_aplic_document_letrproc='L' "
+                + "and fs_docu_aplic_document_consecutivo=028 "
+                + "and fs_docu_aplic_tipo_docu_tipo='METODO' "
+                + "and fs_docu_aplic_document_version=? "
+                + "and s_docu_aplic_extension=?";
+        try {
+            Query q = em.createNativeQuery(consulta);
+            q.setParameter(1, consecutivo);
+            q.setParameter(2, tipo);
+            return (String) q.getSingleResult();
+        } finally {
+            em.close();
+        }
+      }
+                      
+                       public String encontrarPathDocumentoAguaPotable(String consecutivo, String tipo) {
+        System.out.println("consecutivo" + consecutivo);
+        System.out.println("tipo" + tipo);
+        EntityManager em = getEntityManager();
+        String consulta = " 	   select s_docu_aplic_archivo "
+                + "from documento_aplicativo "
+                + "where fs_docu_aplic_document_tipodocu='F' "
+                + "and fs_docu_aplic_document_letrproc='L' "
+                + "and fs_docu_aplic_document_consecutivo=111 "
+                + "and fs_docu_aplic_tipo_docu_tipo='PRINCIPAL' "
+                + "and fs_docu_aplic_document_version=? "
+                + "and s_docu_aplic_extension=?";
+        try {
+            Query q = em.createNativeQuery(consulta);
+            q.setParameter(1, consecutivo);
+            q.setParameter(2, tipo);
+            return (String) q.getSingleResult();
+        } finally {
+            em.close();
+        }
+      }
+                       
+                                  
+        public String encontrarPathDocumentoAguaPotableAnexoA(String consecutivo, String tipo) {
+        System.out.println("consecutivo" + consecutivo);
+        System.out.println("tipo" + tipo);
+        EntityManager em = getEntityManager();
+        String consulta = " 	   select s_docu_aplic_archivo "
+                + "from documento_aplicativo "
+                + "where fs_docu_aplic_document_tipodocu='F' "
+                + "and fs_docu_aplic_document_letrproc='L' "
+                + "and fs_docu_aplic_document_consecutivo=111 "
+                + "and fs_docu_aplic_tipo_docu_tipo='ANEXOA' "
+                + "and fs_docu_aplic_document_version=? "
+                + "and s_docu_aplic_extension=?";
+        try {
+            Query q = em.createNativeQuery(consulta);
+            q.setParameter(1, consecutivo);
+            q.setParameter(2, tipo);
+            return (String) q.getSingleResult();
+        } finally {
+            em.close();
+        }
+      }
+        
+         public String encontrarPathDocumentoAguaPotableAnexoB(String consecutivo, String tipo) {
+        System.out.println("consecutivo" + consecutivo);
+        System.out.println("tipo" + tipo);
+        EntityManager em = getEntityManager();
+        String consulta = " 	   select s_docu_aplic_archivo "
+                + "from documento_aplicativo "
+                + "where fs_docu_aplic_document_tipodocu='F' "
+                + "and fs_docu_aplic_document_letrproc='L' "
+                + "and fs_docu_aplic_document_consecutivo=111 "
+                + "and fs_docu_aplic_tipo_docu_tipo='ANEXOB' "
+                + "and fs_docu_aplic_document_version=? "
+                + "and s_docu_aplic_extension=?";
+        try {
+            Query q = em.createNativeQuery(consulta);
+            q.setParameter(1, consecutivo);
+            q.setParameter(2, tipo);
+            return (String) q.getSingleResult();
+        } finally {
+            em.close();
+        }
+      }
+           
+              public String encontrarPathDocumentoBtex(String consecutivo, String tipo) {
+        System.out.println("consecutivo" + consecutivo);
+        System.out.println("tipo" + tipo);
+        EntityManager em = getEntityManager();
+        String consulta = " 	   select s_docu_aplic_archivo "
+                + "from documento_aplicativo "
+                + "where fs_docu_aplic_document_tipodocu='F' "
+                + "and fs_docu_aplic_document_letrproc='L' "
+                + "and fs_docu_aplic_document_consecutivo=028 "
+                + "and fs_docu_aplic_tipo_docu_tipo='BTEX' "
+                + "and fs_docu_aplic_document_version=? "
+                + "and s_docu_aplic_extension=?";
+        try {
+            Query q = em.createNativeQuery(consulta);
+            q.setParameter(1, consecutivo);
+            q.setParameter(2, tipo);
+            return (String) q.getSingleResult();
+        } finally {
+            em.close();
+        }
+      }
     
 }
