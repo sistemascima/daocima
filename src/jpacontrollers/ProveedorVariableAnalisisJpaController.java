@@ -151,16 +151,20 @@ public class ProveedorVariableAnalisisJpaController implements Serializable {
         EntityManager em = getEntityManager();
         ProveedorVariableAnalisis[] resultados = null;
         
-        String consulta = "SELECT DISTINCT pva.* "
-                + "FROM proveedor_variable_analisis pva "
-                + "WHERE pva.pfi_provarana_variable = ? AND pva.pfs_provarana_proveedor IN "
-                + "     (SELECT c.pfs_cotizaci_proveedor " +
-                "       FROM cotizacion c " +
-                "       WHERE c.pfi_cotizaci_solicomp = ?);";
+         String consulta = "SELECT DISTINCT pva.* "
+                 + "FROM proveedor_variable_analisis pva "
+                 + "WHERE pva.pfi_provarana_variable = ? AND pva.pfs_provarana_proveedor IN "
+                 + "     (SELECT c.pfs_cotizaci_proveedor "
+                 + "       FROM cotizacion c "
+                 + "       WHERE c.pfi_cotizaci_solicomp = ?)"
+                 + " UNION (select *from proveedor_variable_analisis "
+                 + "where pfs_provarana_proveedor='9002414398' "
+                 + "and pfi_provarana_variable=?);";
         try {
             Query q = em.createNativeQuery(consulta, ProveedorVariableAnalisis.class);
             q.setParameter(1, idVariableAnalisis);
             q.setParameter(2, solicitudCompra);
+            q.setParameter(3, idVariableAnalisis);
             return q.getResultList();
         }catch(Exception e){
             e.getStackTrace();
