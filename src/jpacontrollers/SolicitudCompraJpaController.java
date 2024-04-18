@@ -300,6 +300,7 @@ public class SolicitudCompraJpaController implements Serializable {
      
 
     public void darVoBo(Integer solicitudCompra, String codigoUsuario) throws NonexistentEntityException, Exception {
+        System.out.println("este es el visto bueno paso 0 ");
         EntityManager em = getEntityManager();
         String sqlActualizaEstadoSolicitud
                 = "UPDATE solicitud_compra "
@@ -310,21 +311,22 @@ public class SolicitudCompraJpaController implements Serializable {
                 + "	fs_solicomp_usuultmod = ? ,"
                 + "	d_solicomp_ultimodi = NOW() "
                 + "WHERE pi_solicomp_consecutivo = ? ; ";
-
+        System.out.println("este es el visto bueno paso 1 ");
         String sqlRevisarParametros = "SELECT IF(COUNT(d.pi_detsolcom_item) = SUM(IF(d.fs_detsolcom_provsele is not null, 1, 0)), 1, 0) "
                 + "FROM detalle_solicitud_compra d "
                 + "WHERE d.pfi_detsolcom_solicomp = ? ; ";
-
+        System.out.println("este es el visto bueno paso 2 ");
         String sqlDetalle = "SELECT d.* "
                 + "FROM detalle_solicitud_compra d "
                 + "WHERE d.pfi_detsolcom_solicomp = ? "
                 + "LIMIT 1;";
-
+        System.out.println("este es el visto bueno paso 3 ");
         String sqlActualizaEstadoSeleccion
                 = "UPDATE sele_prov_soli_comp "
                 + "SET s_seprsoco_estado = 'S' "
                 + "WHERE fi_seprsoco_solicomp = ? ; ";
         try {
+            System.out.println("este es el visto bueno paso 4 ");
             em = getEntityManager();
             em.getTransaction().begin();
             Query q = em.createNativeQuery(sqlActualizaEstadoSolicitud);
@@ -339,6 +341,7 @@ public class SolicitudCompraJpaController implements Serializable {
 
             // Si todos los detalles tienen proveedor seleccionado (parámetros)
             if (parametros.compareTo(Long.valueOf(1)) == 0) {
+                System.out.println("este es el visto bueno paso 5 ");
                 q = em.createNativeQuery(sqlDetalle, DetalleSolicitudCompra.class);
                 q.setParameter(1, solicitudCompra);
                 DetalleSolicitudCompra detalle = (DetalleSolicitudCompra) q.getSingleResult();
@@ -355,11 +358,13 @@ public class SolicitudCompraJpaController implements Serializable {
                 pa.setParameter(9, detalle.getDetalleSolicitudCompraPK().getPiDetsolcomItem());
                 pa.setParameter(10, detalle.getSDetsolcomObsesele());
                 String resultado = (String) (pa.getSingleResult());
-
+                System.out.println("este es el visto bueno paso 6 ");
                 if (!resultado.equals("OKO")) {
+                    System.out.println("este es el visto bueno paso 7 "+ resultado);
                     em.getTransaction().rollback();
                     throw new Exception("Hubo un error al intentar validar selección con parámetros.");
                 } else {
+                    System.out.println("este es el visto bueno paso 8 ");
                     q = em.createNativeQuery(sqlActualizaEstadoSeleccion);
                     q.setParameter(1, solicitudCompra);
                     q.executeUpdate();
@@ -367,9 +372,11 @@ public class SolicitudCompraJpaController implements Serializable {
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
+            System.out.println("este es el visto bueno paso 9 "+ex);
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 if (findSolicitudCompra(solicitudCompra) == null) {
+                    System.out.println("este es el visto bueno paso 10 ");
                     throw new NonexistentEntityException("La Solicitud de Compra " + solicitudCompra + " ya no existe.");
                 }
             }
