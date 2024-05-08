@@ -14,6 +14,8 @@ import java.util.HashMap;
 public class MatrizHashMap {
 
     private HashMap<String, String> matrizAnalisis = new HashMap<String, String>();
+    
+    
 
     public MatrizHashMap() {
         matrizAnalisis.put("MATRIZ AGUAS", "A-");
@@ -33,6 +35,8 @@ public class MatrizHashMap {
     public HashMap<String, String> getMatrizAnalisis() {
         return matrizAnalisis;
     }
+    
+    
 
     public void setMatrizAnalisis(HashMap<String, String> matrizAnalisis) {
         this.matrizAnalisis = matrizAnalisis;
