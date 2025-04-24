@@ -393,14 +393,17 @@ public class ReporteJpaController implements Serializable {
     }
 
     public void crear(Date muestreo_fech_inic, String planMuestreo, String tecnico, int idMunicipio,
-                        int valorCiudad, int proyecto , Date fechaRecepcionMuestra, String usuarioCreador,
-                        String idReporte, String nitReporte, String nitReporteFacturacion, String estadoReporte,
-                        int numeroReporte,
-                        String versionReporte, String matriz) { 
-        
-        switch(matriz){
-            case "MATRIZ CALIDAD DEL AIRE" :
-                 EntityManager em = getEntityManager();
+            int valorCiudad, int proyecto, Date fechaRecepcionMuestra, String usuarioCreador,
+            String idReporte, String nitReporte, String nitReporteFacturacion, String estadoReporte,
+            int numeroReporte,
+            String versionReporte, String matriz, String direccionCliente,
+            String telefonoCliente,
+            String correoElectronicoCliente,
+            String contactoCliente) {
+
+        switch (matriz) {
+            case "MATRIZ CALIDAD DEL AIRE":
+                EntityManager em = getEntityManager();
                 StoredProcedureQuery procedimientoAlmacenado = em.createStoredProcedureQuery("pa_crear_muestreo_reporte_aire");
                 em.getTransaction().begin();
                 procedimientoAlmacenado.registerStoredProcedureParameter("muestreo_fech_inicio", Date.class, ParameterMode.IN);
@@ -417,6 +420,11 @@ public class ReporteJpaController implements Serializable {
                 procedimientoAlmacenado.registerStoredProcedureParameter("version_reporte", String.class, ParameterMode.IN);
                 procedimientoAlmacenado.registerStoredProcedureParameter("cliente_facturacion", String.class, ParameterMode.IN);
                 procedimientoAlmacenado.registerStoredProcedureParameter("numero_reporte", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenado.registerStoredProcedureParameter("direccionCliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenado.registerStoredProcedureParameter("telefonoCliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenado.registerStoredProcedureParameter("correoElectronicoCliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenado.registerStoredProcedureParameter("contactoCliente", String.class, ParameterMode.IN);
+
                 procedimientoAlmacenado.setParameter("muestreo_fech_inicio", muestreo_fech_inic);
                 procedimientoAlmacenado.setParameter("muestreo_plan_muestreo", planMuestreo);
                 procedimientoAlmacenado.setParameter("muestreo_tecnico", tecnico);
@@ -431,170 +439,201 @@ public class ReporteJpaController implements Serializable {
                 procedimientoAlmacenado.setParameter("version_reporte", versionReporte);
                 procedimientoAlmacenado.setParameter("cliente_facturacion", nitReporteFacturacion);
                 procedimientoAlmacenado.setParameter("numero_reporte", numeroReporte);
+                procedimientoAlmacenado.setParameter("direccionCliente", direccionCliente);
+                procedimientoAlmacenado.setParameter("telefonoCliente", telefonoCliente);
+                procedimientoAlmacenado.setParameter("correoElectronicoCliente", correoElectronicoCliente);
+                procedimientoAlmacenado.setParameter("contactoCliente", contactoCliente);
                 procedimientoAlmacenado.execute();
                 em.getTransaction().commit();
-            break;
+                break;
 
-              case "MATRIZ BIOTA":
-                  EntityManager emHidro = getEntityManager();
-                  StoredProcedureQuery procedimientoAlmacenadoHidro = emHidro.createStoredProcedureQuery("pa_crear_reporte_hidrobiologia");
-                  emHidro.getTransaction().begin();
-                  procedimientoAlmacenadoHidro.registerStoredProcedureParameter("muestreo_fech_inicio", Date.class, ParameterMode.IN);
-                  procedimientoAlmacenadoHidro.registerStoredProcedureParameter("muestreo_plan_muestreo", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoHidro.registerStoredProcedureParameter("muestreo_tecnico", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoHidro.registerStoredProcedureParameter("valor_municipio", Integer.class, ParameterMode.IN);
-                  procedimientoAlmacenadoHidro.registerStoredProcedureParameter("valor_ciudad", Integer.class, ParameterMode.IN);
-                  procedimientoAlmacenadoHidro.registerStoredProcedureParameter("proyecto", Integer.class, ParameterMode.IN);
-                  procedimientoAlmacenadoHidro.registerStoredProcedureParameter("fecha_recepcion_muestra", Date.class, ParameterMode.IN);
-                  procedimientoAlmacenadoHidro.registerStoredProcedureParameter("usuario_creador", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoHidro.registerStoredProcedureParameter("pi_reporte_id", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoHidro.registerStoredProcedureParameter("nit_reporte_cliente", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoHidro.registerStoredProcedureParameter("estado_reporte", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoHidro.registerStoredProcedureParameter("version_reporte", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoHidro.registerStoredProcedureParameter("cliente_facturacion", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoHidro.registerStoredProcedureParameter("numero_reporte", Integer.class, ParameterMode.IN);
+            case "MATRIZ BIOTA":
+                EntityManager emHidro = getEntityManager();
+                StoredProcedureQuery procedimientoAlmacenadoHidro = emHidro.createStoredProcedureQuery("pa_crear_reporte_hidrobiologia");
+                emHidro.getTransaction().begin();
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("muestreo_fech_inicio", Date.class, ParameterMode.IN);
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("muestreo_plan_muestreo", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("muestreo_tecnico", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("valor_municipio", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("valor_ciudad", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("proyecto", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("fecha_recepcion_muestra", Date.class, ParameterMode.IN);
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("usuario_creador", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("pi_reporte_id", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("nit_reporte_cliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("estado_reporte", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("version_reporte", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("cliente_facturacion", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("numero_reporte", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("direccionCliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("telefonoCliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("correoElectronicoCliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoHidro.registerStoredProcedureParameter("contactoCliente", String.class, ParameterMode.IN);
 
-                  procedimientoAlmacenadoHidro.setParameter("muestreo_fech_inicio", muestreo_fech_inic);
-                  procedimientoAlmacenadoHidro.setParameter("muestreo_plan_muestreo", planMuestreo);
-                  procedimientoAlmacenadoHidro.setParameter("muestreo_tecnico", tecnico);
-                  procedimientoAlmacenadoHidro.setParameter("valor_municipio", idMunicipio);
-                  procedimientoAlmacenadoHidro.setParameter("valor_ciudad", valorCiudad);
-                  procedimientoAlmacenadoHidro.setParameter("proyecto", proyecto);
-                  procedimientoAlmacenadoHidro.setParameter("fecha_recepcion_muestra", fechaRecepcionMuestra);
-                  procedimientoAlmacenadoHidro.setParameter("usuario_creador", usuarioCreador);
-                  procedimientoAlmacenadoHidro.setParameter("pi_reporte_id", idReporte);
-                  procedimientoAlmacenadoHidro.setParameter("nit_reporte_cliente", nitReporte);
-                  procedimientoAlmacenadoHidro.setParameter("estado_reporte", estadoReporte);
-                  procedimientoAlmacenadoHidro.setParameter("version_reporte", versionReporte);
-                  procedimientoAlmacenadoHidro.setParameter("cliente_facturacion", nitReporteFacturacion);
-                  procedimientoAlmacenadoHidro.setParameter("numero_reporte", numeroReporte);
-                  procedimientoAlmacenadoHidro.execute();
-                  emHidro.getTransaction().commit();
+                procedimientoAlmacenadoHidro.setParameter("muestreo_fech_inicio", muestreo_fech_inic);
+                procedimientoAlmacenadoHidro.setParameter("muestreo_plan_muestreo", planMuestreo);
+                procedimientoAlmacenadoHidro.setParameter("muestreo_tecnico", tecnico);
+                procedimientoAlmacenadoHidro.setParameter("valor_municipio", idMunicipio);
+                procedimientoAlmacenadoHidro.setParameter("valor_ciudad", valorCiudad);
+                procedimientoAlmacenadoHidro.setParameter("proyecto", proyecto);
+                procedimientoAlmacenadoHidro.setParameter("fecha_recepcion_muestra", fechaRecepcionMuestra);
+                procedimientoAlmacenadoHidro.setParameter("usuario_creador", usuarioCreador);
+                procedimientoAlmacenadoHidro.setParameter("pi_reporte_id", idReporte);
+                procedimientoAlmacenadoHidro.setParameter("nit_reporte_cliente", nitReporte);
+                procedimientoAlmacenadoHidro.setParameter("estado_reporte", estadoReporte);
+                procedimientoAlmacenadoHidro.setParameter("version_reporte", versionReporte);
+                procedimientoAlmacenadoHidro.setParameter("cliente_facturacion", nitReporteFacturacion);
+                procedimientoAlmacenadoHidro.setParameter("numero_reporte", numeroReporte);
+                procedimientoAlmacenadoHidro.setParameter("direccionCliente", direccionCliente);
+                procedimientoAlmacenadoHidro.setParameter("telefonoCliente", telefonoCliente);
+                procedimientoAlmacenadoHidro.setParameter("correoElectronicoCliente", correoElectronicoCliente);
+                procedimientoAlmacenadoHidro.setParameter("contactoCliente", contactoCliente);
+                procedimientoAlmacenadoHidro.execute();
+                emHidro.getTransaction().commit();
 
                 break;
-                
-               
-                
-                 case "MATRIZ AGUA POTABLE":
-                  EntityManager emAguaPotable = getEntityManager();
-                  StoredProcedureQuery procedimientoAlmacenadoAguaPotable = emAguaPotable.createStoredProcedureQuery("pa_crear_reporte_agua_potable");
-                  emAguaPotable.getTransaction().begin();
-                  procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("muestreo_fech_inicio", Date.class, ParameterMode.IN);
-                  procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("muestreo_plan_muestreo", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("muestreo_tecnico", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("valor_municipio", Integer.class, ParameterMode.IN);
-                  procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("valor_ciudad", Integer.class, ParameterMode.IN);
-                  procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("proyecto", Integer.class, ParameterMode.IN);
-                  procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("fecha_recepcion_muestra", Date.class, ParameterMode.IN);
-                  procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("usuario_creador", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("pi_reporte_id", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("nit_reporte_cliente", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("estado_reporte", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("version_reporte", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("cliente_facturacion", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("numero_reporte", Integer.class, ParameterMode.IN);
 
-                  procedimientoAlmacenadoAguaPotable.setParameter("muestreo_fech_inicio", muestreo_fech_inic);
-                  procedimientoAlmacenadoAguaPotable.setParameter("muestreo_plan_muestreo", planMuestreo);
-                  procedimientoAlmacenadoAguaPotable.setParameter("muestreo_tecnico", tecnico);
-                  procedimientoAlmacenadoAguaPotable.setParameter("valor_municipio", idMunicipio);
-                  procedimientoAlmacenadoAguaPotable.setParameter("valor_ciudad", valorCiudad);
-                  procedimientoAlmacenadoAguaPotable.setParameter("proyecto", proyecto);
-                  procedimientoAlmacenadoAguaPotable.setParameter("fecha_recepcion_muestra", fechaRecepcionMuestra);
-                  procedimientoAlmacenadoAguaPotable.setParameter("usuario_creador", usuarioCreador);
-                  procedimientoAlmacenadoAguaPotable.setParameter("pi_reporte_id", idReporte);
-                  procedimientoAlmacenadoAguaPotable.setParameter("nit_reporte_cliente", nitReporte);
-                  procedimientoAlmacenadoAguaPotable.setParameter("estado_reporte", estadoReporte);
-                  procedimientoAlmacenadoAguaPotable.setParameter("version_reporte", versionReporte);
-                  procedimientoAlmacenadoAguaPotable.setParameter("cliente_facturacion", nitReporteFacturacion);
-                  procedimientoAlmacenadoAguaPotable.setParameter("numero_reporte", numeroReporte);
-                  procedimientoAlmacenadoAguaPotable.execute();
-                  emAguaPotable.getTransaction().commit();
+            case "MATRIZ AGUA POTABLE":
+                EntityManager emAguaPotable = getEntityManager();
+                StoredProcedureQuery procedimientoAlmacenadoAguaPotable = emAguaPotable.createStoredProcedureQuery("pa_crear_reporte_agua_potable");
+                emAguaPotable.getTransaction().begin();
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("muestreo_fech_inicio", Date.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("muestreo_plan_muestreo", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("muestreo_tecnico", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("valor_municipio", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("valor_ciudad", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("proyecto", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("fecha_recepcion_muestra", Date.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("usuario_creador", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("pi_reporte_id", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("nit_reporte_cliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("estado_reporte", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("version_reporte", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("cliente_facturacion", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("numero_reporte", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("direccionCliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("telefonoCliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("correoElectronicoCliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.registerStoredProcedureParameter("contactoCliente", String.class, ParameterMode.IN);
 
-                break;
-                
-                case "MATRIZ CONCRETO":
-                  EntityManager emConcreto = getEntityManager();
-                  StoredProcedureQuery procedimientoAlmacenadoConcreto = emConcreto.createStoredProcedureQuery("pa_crear_reporte_agua_potable");
-                  emConcreto.getTransaction().begin();
-                  procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("muestreo_fech_inicio", Date.class, ParameterMode.IN);
-                  procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("muestreo_plan_muestreo", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("muestreo_tecnico", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("valor_municipio", Integer.class, ParameterMode.IN);
-                  procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("valor_ciudad", Integer.class, ParameterMode.IN);
-                  procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("proyecto", Integer.class, ParameterMode.IN);
-                  procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("fecha_recepcion_muestra", Date.class, ParameterMode.IN);
-                  procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("usuario_creador", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("pi_reporte_id", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("nit_reporte_cliente", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("estado_reporte", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("version_reporte", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("cliente_facturacion", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("numero_reporte", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenadoAguaPotable.setParameter("muestreo_fech_inicio", muestreo_fech_inic);
+                procedimientoAlmacenadoAguaPotable.setParameter("muestreo_plan_muestreo", planMuestreo);
+                procedimientoAlmacenadoAguaPotable.setParameter("muestreo_tecnico", tecnico);
+                procedimientoAlmacenadoAguaPotable.setParameter("valor_municipio", idMunicipio);
+                procedimientoAlmacenadoAguaPotable.setParameter("valor_ciudad", valorCiudad);
+                procedimientoAlmacenadoAguaPotable.setParameter("proyecto", proyecto);
+                procedimientoAlmacenadoAguaPotable.setParameter("fecha_recepcion_muestra", fechaRecepcionMuestra);
+                procedimientoAlmacenadoAguaPotable.setParameter("usuario_creador", usuarioCreador);
+                procedimientoAlmacenadoAguaPotable.setParameter("pi_reporte_id", idReporte);
+                procedimientoAlmacenadoAguaPotable.setParameter("nit_reporte_cliente", nitReporte);
+                procedimientoAlmacenadoAguaPotable.setParameter("estado_reporte", estadoReporte);
+                procedimientoAlmacenadoAguaPotable.setParameter("version_reporte", versionReporte);
+                procedimientoAlmacenadoAguaPotable.setParameter("cliente_facturacion", nitReporteFacturacion);
+                procedimientoAlmacenadoAguaPotable.setParameter("numero_reporte", numeroReporte);
 
-                  procedimientoAlmacenadoConcreto.setParameter("muestreo_fech_inicio", muestreo_fech_inic);
-                  procedimientoAlmacenadoConcreto.setParameter("muestreo_plan_muestreo", planMuestreo);
-                  procedimientoAlmacenadoConcreto.setParameter("muestreo_tecnico", tecnico);
-                  procedimientoAlmacenadoConcreto.setParameter("valor_municipio", idMunicipio);
-                  procedimientoAlmacenadoConcreto.setParameter("valor_ciudad", valorCiudad);
-                  procedimientoAlmacenadoConcreto.setParameter("proyecto", proyecto);
-                  procedimientoAlmacenadoConcreto.setParameter("fecha_recepcion_muestra", fechaRecepcionMuestra);
-                  procedimientoAlmacenadoConcreto.setParameter("usuario_creador", usuarioCreador);
-                  procedimientoAlmacenadoConcreto.setParameter("pi_reporte_id", idReporte);
-                  procedimientoAlmacenadoConcreto.setParameter("nit_reporte_cliente", nitReporte);
-                  procedimientoAlmacenadoConcreto.setParameter("estado_reporte", estadoReporte);
-                  procedimientoAlmacenadoConcreto.setParameter("version_reporte", versionReporte);
-                  procedimientoAlmacenadoConcreto.setParameter("cliente_facturacion", nitReporteFacturacion);
-                  procedimientoAlmacenadoConcreto.setParameter("numero_reporte", numeroReporte);
-                  procedimientoAlmacenadoConcreto.execute();
-                  emConcreto.getTransaction().commit();
+                procedimientoAlmacenadoAguaPotable.setParameter("direccionCliente", direccionCliente);
+                procedimientoAlmacenadoAguaPotable.setParameter("telefonoCliente", telefonoCliente);
+                procedimientoAlmacenadoAguaPotable.setParameter("correoElectronicoCliente", correoElectronicoCliente);
+                procedimientoAlmacenadoAguaPotable.setParameter("contactoCliente", contactoCliente);
+                procedimientoAlmacenadoAguaPotable.execute();
+                emAguaPotable.getTransaction().commit();
 
                 break;
-                
-                
-                
-                 default:
-                 EntityManager emMatricesDistintas = getEntityManager();
-                  StoredProcedureQuery procedimientoAlmacenadoMatricesDistintas = emMatricesDistintas.createStoredProcedureQuery("pa_crear_reporte_aguas");
-                  emMatricesDistintas.getTransaction().begin();
-                  procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("muestreo_fech_inicio", Date.class, ParameterMode.IN);
-                  procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("muestreo_plan_muestreo", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("muestreo_tecnico", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("valor_municipio", Integer.class, ParameterMode.IN);
-                  procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("valor_ciudad", Integer.class, ParameterMode.IN);
-                  procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("proyecto", Integer.class, ParameterMode.IN);
-                  procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("fecha_recepcion_muestra", Date.class, ParameterMode.IN);
-                  procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("usuario_creador", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("pi_reporte_id", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("nit_reporte_cliente", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("estado_reporte", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("version_reporte", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("cliente_facturacion", String.class, ParameterMode.IN);
-                  procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("numero_reporte", Integer.class, ParameterMode.IN);
 
-                  procedimientoAlmacenadoMatricesDistintas.setParameter("muestreo_fech_inicio", muestreo_fech_inic);
-                  procedimientoAlmacenadoMatricesDistintas.setParameter("muestreo_plan_muestreo", planMuestreo);
-                  procedimientoAlmacenadoMatricesDistintas.setParameter("muestreo_tecnico", tecnico);
-                  procedimientoAlmacenadoMatricesDistintas.setParameter("valor_municipio", idMunicipio);
-                  procedimientoAlmacenadoMatricesDistintas.setParameter("valor_ciudad", valorCiudad);
-                  procedimientoAlmacenadoMatricesDistintas.setParameter("proyecto", proyecto);
-                  procedimientoAlmacenadoMatricesDistintas.setParameter("fecha_recepcion_muestra", fechaRecepcionMuestra);
-                  procedimientoAlmacenadoMatricesDistintas.setParameter("usuario_creador", usuarioCreador);
-                  procedimientoAlmacenadoMatricesDistintas.setParameter("pi_reporte_id", idReporte);
-                  procedimientoAlmacenadoMatricesDistintas.setParameter("nit_reporte_cliente", nitReporte);
-                  procedimientoAlmacenadoMatricesDistintas.setParameter("estado_reporte", estadoReporte);
-                  procedimientoAlmacenadoMatricesDistintas.setParameter("version_reporte", versionReporte);
-                  procedimientoAlmacenadoMatricesDistintas.setParameter("cliente_facturacion", nitReporteFacturacion);
-                  procedimientoAlmacenadoMatricesDistintas.setParameter("numero_reporte", numeroReporte);
-                  procedimientoAlmacenadoMatricesDistintas.execute();
-                  emMatricesDistintas.getTransaction().commit();     
-                
-            
+            case "MATRIZ CONCRETO":
+                EntityManager emConcreto = getEntityManager();
+                StoredProcedureQuery procedimientoAlmacenadoConcreto = emConcreto.createStoredProcedureQuery("pa_crear_reporte_agua_potable");
+                emConcreto.getTransaction().begin();
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("muestreo_fech_inicio", Date.class, ParameterMode.IN);
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("muestreo_plan_muestreo", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("muestreo_tecnico", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("valor_municipio", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("valor_ciudad", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("proyecto", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("fecha_recepcion_muestra", Date.class, ParameterMode.IN);
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("usuario_creador", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("pi_reporte_id", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("nit_reporte_cliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("estado_reporte", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("version_reporte", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("cliente_facturacion", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("numero_reporte", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("direccionCliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("telefonoCliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("correoElectronicoCliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoConcreto.registerStoredProcedureParameter("contactoCliente", String.class, ParameterMode.IN);
+
+                procedimientoAlmacenadoConcreto.setParameter("muestreo_fech_inicio", muestreo_fech_inic);
+                procedimientoAlmacenadoConcreto.setParameter("muestreo_plan_muestreo", planMuestreo);
+                procedimientoAlmacenadoConcreto.setParameter("muestreo_tecnico", tecnico);
+                procedimientoAlmacenadoConcreto.setParameter("valor_municipio", idMunicipio);
+                procedimientoAlmacenadoConcreto.setParameter("valor_ciudad", valorCiudad);
+                procedimientoAlmacenadoConcreto.setParameter("proyecto", proyecto);
+                procedimientoAlmacenadoConcreto.setParameter("fecha_recepcion_muestra", fechaRecepcionMuestra);
+                procedimientoAlmacenadoConcreto.setParameter("usuario_creador", usuarioCreador);
+                procedimientoAlmacenadoConcreto.setParameter("pi_reporte_id", idReporte);
+                procedimientoAlmacenadoConcreto.setParameter("nit_reporte_cliente", nitReporte);
+                procedimientoAlmacenadoConcreto.setParameter("estado_reporte", estadoReporte);
+                procedimientoAlmacenadoConcreto.setParameter("version_reporte", versionReporte);
+                procedimientoAlmacenadoConcreto.setParameter("cliente_facturacion", nitReporteFacturacion);
+                procedimientoAlmacenadoConcreto.setParameter("numero_reporte", numeroReporte);
+                procedimientoAlmacenadoConcreto.setParameter("direccionCliente", direccionCliente);
+                procedimientoAlmacenadoConcreto.setParameter("telefonoCliente", telefonoCliente);
+                procedimientoAlmacenadoConcreto.setParameter("correoElectronicoCliente", correoElectronicoCliente);
+                procedimientoAlmacenadoConcreto.setParameter("contactoCliente", contactoCliente);
+                procedimientoAlmacenadoConcreto.execute();
+                emConcreto.getTransaction().commit();
+
+                break;
+
+            default:
+                EntityManager emMatricesDistintas = getEntityManager();
+                StoredProcedureQuery procedimientoAlmacenadoMatricesDistintas = emMatricesDistintas.createStoredProcedureQuery("pa_crear_reporte_aguas");
+                emMatricesDistintas.getTransaction().begin();
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("muestreo_fech_inicio", Date.class, ParameterMode.IN);
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("muestreo_plan_muestreo", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("muestreo_tecnico", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("valor_municipio", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("valor_ciudad", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("proyecto", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("fecha_recepcion_muestra", Date.class, ParameterMode.IN);
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("usuario_creador", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("pi_reporte_id", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("nit_reporte_cliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("estado_reporte", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("version_reporte", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("cliente_facturacion", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("numero_reporte", Integer.class, ParameterMode.IN);
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("direccionCliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("telefonoCliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("correoElectronicoCliente", String.class, ParameterMode.IN);
+                procedimientoAlmacenadoMatricesDistintas.registerStoredProcedureParameter("contactoCliente", String.class, ParameterMode.IN);
+
+                procedimientoAlmacenadoMatricesDistintas.setParameter("muestreo_fech_inicio", muestreo_fech_inic);
+                procedimientoAlmacenadoMatricesDistintas.setParameter("muestreo_plan_muestreo", planMuestreo);
+                procedimientoAlmacenadoMatricesDistintas.setParameter("muestreo_tecnico", tecnico);
+                procedimientoAlmacenadoMatricesDistintas.setParameter("valor_municipio", idMunicipio);
+                procedimientoAlmacenadoMatricesDistintas.setParameter("valor_ciudad", valorCiudad);
+                procedimientoAlmacenadoMatricesDistintas.setParameter("proyecto", proyecto);
+                procedimientoAlmacenadoMatricesDistintas.setParameter("fecha_recepcion_muestra", fechaRecepcionMuestra);
+                procedimientoAlmacenadoMatricesDistintas.setParameter("usuario_creador", usuarioCreador);
+                procedimientoAlmacenadoMatricesDistintas.setParameter("pi_reporte_id", idReporte);
+                procedimientoAlmacenadoMatricesDistintas.setParameter("nit_reporte_cliente", nitReporte);
+                procedimientoAlmacenadoMatricesDistintas.setParameter("estado_reporte", estadoReporte);
+                procedimientoAlmacenadoMatricesDistintas.setParameter("version_reporte", versionReporte);
+                procedimientoAlmacenadoMatricesDistintas.setParameter("cliente_facturacion", nitReporteFacturacion);
+                procedimientoAlmacenadoMatricesDistintas.setParameter("numero_reporte", numeroReporte);
+                procedimientoAlmacenadoMatricesDistintas.setParameter("direccionCliente", direccionCliente);
+                procedimientoAlmacenadoMatricesDistintas.setParameter("telefonoCliente", telefonoCliente);
+                procedimientoAlmacenadoMatricesDistintas.setParameter("correoElectronicoCliente", correoElectronicoCliente);
+                procedimientoAlmacenadoMatricesDistintas.setParameter("contactoCliente", contactoCliente);
+                procedimientoAlmacenadoMatricesDistintas.execute();
+                emMatricesDistintas.getTransaction().commit();
+
         }
-                
-        
-       System.out.println("usuario creador " + usuarioCreador);
-       
+
+        System.out.println("usuario creador " + usuarioCreador);
+
         /*
         try {     
          String insert= "INSERT INTO reporte (pi_reporte_id, "
@@ -1162,6 +1201,26 @@ public class ReporteJpaController implements Serializable {
         em.getTransaction().commit();
     
     }
+    
+      public void actualizarReporteDatosCliente(Reporte reporteActual) {
+
+        EntityManager em = getEntityManager();
+        String insert = "UPDATE reporte SET s_reporte_cliente_direccion=?, "
+                + "s_reporte_cliente_telefono= ?, s_reporte_cliente_correo=?, "
+                + "s_reporte_cliente_contacto=?,  "
+                + " d_reporte_fechmodi =NOW()  WHERE pi_reporte_id= ?";
+        em.getTransaction().begin();
+        Query insercion = em.createNativeQuery(insert);
+        insercion.setParameter(1, reporteActual.getS_reporte_cliente_direccion());
+        insercion.setParameter(2, reporteActual.getS_reporte_cliente_telefono());
+        insercion.setParameter(3, reporteActual.getS_reporte_cliente_correo());
+        insercion.setParameter(4, reporteActual.getS_reporte_cliente_contacto());
+        insercion.setParameter(5, reporteActual.getPiReporteId());
+        insercion.executeUpdate();
+        em.getTransaction().commit();
+    
+    
+    }
 
     public List<Object> encontrarReportesPendientes(VariableAnalisis variableAnalisis, Proveedor proveedor) {
          EntityManager em = getEntityManager();
@@ -1204,6 +1263,20 @@ public class ReporteJpaController implements Serializable {
                 + " join muestra_analisis on muestra_analisis.fi_muestraanal_muestra = muestra.pi_muestra_id"
                 + " join valor on valor.fi_valor_muestraanal = muestra_analisis.pi_muestraanal_id"
                 + " where fs_muestra_reporte =? and valor.s_valor_valor is null";
+        try {
+            Query q = em.createNativeQuery(consulta);
+            q.setParameter(1, idReporte);
+            return q.getResultList();
+        } finally {
+            em.close();
+    }
+    }
+    
+    
+     public List<Object> encontrarCantidadMuestras(String idReporte) {
+        EntityManager em = getEntityManager();
+        String consulta ="select count(*) from muestra"
+                + " where fs_muestra_reporte =?";
         try {
             Query q = em.createNativeQuery(consulta);
             q.setParameter(1, idReporte);

@@ -118,9 +118,19 @@ public class Reporte implements Serializable {
 
     @OneToMany(mappedBy = "reporte")
     private List<Muestra> muestraList;
+    
+    @Column(name = "s_reporte_cliente_direccion", length = 25)
+    private String s_reporte_cliente_direccion;
 
-
-
+    @Column(name = "s_reporte_cliente_telefono", length = 25)
+     private String s_reporte_cliente_telefono;
+    
+    @Column(name = "s_reporte_cliente_correo", length = 25)
+     private String s_reporte_cliente_correo;
+    
+    @Column(name = "s_reporte_cliente_contacto", length = 25)
+     private String s_reporte_cliente_contacto;
+      
     public Integer getNoAnexos() {
         return noAnexos;
     }
@@ -350,6 +360,38 @@ public class Reporte implements Serializable {
 
     public void setDocumento(Documento documento) {
         this.documento = documento;
+    }
+
+    public String getS_reporte_cliente_direccion() {
+        return s_reporte_cliente_direccion;
+    }
+
+    public void setS_reporte_cliente_direccion(String s_reporte_cliente_direccion) {
+        this.s_reporte_cliente_direccion = s_reporte_cliente_direccion;
+    }
+
+    public String getS_reporte_cliente_telefono() {
+        return s_reporte_cliente_telefono;
+    }
+
+    public void setS_reporte_cliente_telefono(String s_reporte_cliente_telefono) {
+        this.s_reporte_cliente_telefono = s_reporte_cliente_telefono;
+    }
+
+    public String getS_reporte_cliente_correo() {
+        return s_reporte_cliente_correo;
+    }
+
+    public void setS_reporte_cliente_correo(String s_reporte_cliente_correo) {
+        this.s_reporte_cliente_correo = s_reporte_cliente_correo;
+    }
+
+    public String getS_reporte_cliente_contacto() {
+        return s_reporte_cliente_contacto;
+    }
+
+    public void setS_reporte_cliente_contacto(String s_reporte_cliente_contacto) {
+        this.s_reporte_cliente_contacto = s_reporte_cliente_contacto;
     }
 
    

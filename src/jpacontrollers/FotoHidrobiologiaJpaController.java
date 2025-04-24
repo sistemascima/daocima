@@ -14,6 +14,8 @@ import java.io.InputStream;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureQuery;
 
 /**
  *
@@ -415,7 +417,66 @@ public class FotoHidrobiologiaJpaController implements Serializable {
         insercion.setParameter(4, sufijo);
         return (Integer) insercion.getSingleResult();
     }
-     
+
+    public void crearFotoHidro(int idDatHidr, String reporte, String usuario, String pathHidro) {
+         EntityManager em = getEntityManager();
+        try {     
+            StoredProcedureQuery procedimientoAlmacenado = em.createStoredProcedureQuery("pa_insertar_foto_hidro");
+             em.getTransaction().begin();
+            System.out.println("ESTE ES EL IDDATHIDR " + idDatHidr);
+            System.out.println("ESTE ES EL REPORTE " + reporte);
+            System.out.println("ESTE ES EL USUARIO " + usuario);
+            procedimientoAlmacenado.registerStoredProcedureParameter("dathidr", (Class)Integer.TYPE, ParameterMode.IN);
+            procedimientoAlmacenado.registerStoredProcedureParameter("reporte", (Class)String.class, ParameterMode.IN);
+            procedimientoAlmacenado.registerStoredProcedureParameter("usuacrea", (Class)String.class, ParameterMode.IN);
+            procedimientoAlmacenado.registerStoredProcedureParameter("pathHidro", (Class)String.class, ParameterMode.IN);
+            
+            procedimientoAlmacenado.setParameter("dathidr", idDatHidr);
+            procedimientoAlmacenado.setParameter("reporte", reporte);
+            procedimientoAlmacenado.setParameter("usuacrea", usuario);
+            procedimientoAlmacenado.setParameter("pathHidro",pathHidro );
+            
+            procedimientoAlmacenado.execute();
+            em.getTransaction().commit();
+            em.close();
+            
+            /*
+               String insert ="INSERT INTO foto_hidrobiologia "
+                       + "(fi_fotohidro_dathidr, fs_fotohidro_reporte, "
+                       + "fs_fotohidro_usuacrea, d_fotohidro_fechacreac, fi_fotohidro_varianal, s_fotohidro_path ) "
+                       + "VALUES (?, ?, ?, now(), ?, ? ) ";
+             em.getTransaction().begin();
+             Query insercion = em.createNativeQuery(insert);
+             insercion.setParameter(1, idDatHidr);
+             insercion.setParameter(2, reporte);
+             insercion.setParameter(3, usuario);
+             insercion.setParameter(4, idVarianal);
+             insercion.setParameter(5, path);
+             
+             insercion.executeUpdate();
+             em.getTransaction().commit();  
+             System.out.println("termina aqui insercion");*/
+        } catch (Exception ex) {
+           throw ex;
+        } finally {
+            
+        }      
+    }
+    
+    
+      public int finFiDatoHidroByPiDatoHidr(Integer piVarianalId) {
+      EntityManager em = getEntityManager();
+           try {
+               em.getTransaction().begin();
+               Query q = em.createNativeQuery("select fi_dato_hidro_var_anal "
+                       + "from dato_hidrobiologia "
+                       + "where pi_dato_hidro=?");
+               q.setParameter(1, piVarianalId);
+               return (Integer) q.getSingleResult();
+           } finally {
+               em.close();
+           } 
+    }
    
    
 

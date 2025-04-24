@@ -470,7 +470,7 @@ public class ValorJpaController implements Serializable
     
     public void actualizarValores(final List<String> listaValores, final List<String> listaValoresReal, final List<Integer> listaMuestra, final String usuarioModificacion, final int idVariableAnalisis, final List<Date> fechaIngreso) {
         System.out.println("viene aqui y actualiza");
-        /*final EntityManager em = this.getEntityManager();
+        final EntityManager em = this.getEntityManager();
         for (int i = 0; i < listaValores.size(); ++i) {
             final StoredProcedureQuery procedimientoAlmacenado = em.createStoredProcedureQuery("pa_llenar_valores");
             em.getTransaction().begin();
@@ -496,7 +496,7 @@ public class ValorJpaController implements Serializable
             em.getTransaction().commit();
             
         }
-        em.close();*/
+        em.close();
     }
     
     public int crearValorCalidad(final Valor valor, final String usuario) {

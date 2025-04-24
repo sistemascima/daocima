@@ -27,6 +27,11 @@ public class ReportEntity {
     private String estado;
     private int numeroReporte;
     private int version;
+    private String direccion;
+    private String telefono;
+    private String correo;
+    private String contacto;
+    
 
     public ReportEntity(Date fechaInicio, 
                         String planMuestreo, 
@@ -41,7 +46,11 @@ public class ReportEntity {
                         String nitClienteFacturacion, 
                         String estado, 
                         int numeroReporte, 
-                        int version) {
+                        int version,
+                        String direccion,
+                        String telefono,
+                        String correo,
+                        String contacto) {
         
         this.fechaInicio = fechaInicio;
         this.planMuestreo = planMuestreo;
@@ -57,6 +66,10 @@ public class ReportEntity {
         this.estado = estado;
         this.numeroReporte = numeroReporte;
         this.version= version;
+        this.direccion= direccion;
+        this.telefono= telefono;
+        this.correo= correo;
+        this.contacto= contacto;
     }
 
     public Date getFechaInicio() {
@@ -170,6 +183,38 @@ public class ReportEntity {
 
     public void setVersion(int version) {
         this.version = version;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContacto() {
+        return contacto;
+    }
+
+    public void setContacto(String contacto) {
+        this.contacto = contacto;
     }
     
     
